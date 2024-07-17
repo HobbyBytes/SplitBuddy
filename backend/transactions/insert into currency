@@ -1,0 +1,3 @@
+-- SQLite
+INSERT INTO transactions_currency (id, currency)
+VALUES (06, "JPY");
