@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,20 +15,50 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Currency',
+            name="Currency",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('currency', models.CharField(max_length=3)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("currency", models.CharField(max_length=3)),
             ],
         ),
         migrations.CreateModel(
-            name='Transaction',
+            name="Transaction",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=7)),
-                ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
-                ('currency', models.ForeignKey(default='USD', on_delete=django.db.models.deletion.PROTECT, to='transactions.currency')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transactions', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=7)),
+                ("timestamp", models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "currency",
+                    models.ForeignKey(
+                        default="USD",
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="transactions.currency",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="transactions",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
