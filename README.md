@@ -14,7 +14,7 @@ Follow the instructions below to set up and run the application.
    mkvirtualenv splitbuddy
    ```
 
-   We prefer `mkvirtualenv` wrapper around the default `virtualenv` module. You can learn more about it [https://github.com/python-virtualenvwrapper/virtualenvwrapper](here).
+   We prefer `mkvirtualenv` wrapper around the default `virtualenv` module. You can learn more about it [here](https://github.com/python-virtualenvwrapper/virtualenvwrapper).
 
 3. Activate the virtual environment:
 
@@ -48,8 +48,8 @@ Follow the instructions below to set up and run the application.
    python manage.py runserver
    ```
 4. Access the application:
-   - Main site: http://127.0.0.1:8000/
-   - Admin portal: http://127.0.0.1:8000/admin/
+   - Main site: `http://127.0.0.1:8000/`
+   - Admin portal: `http://127.0.0.1:8000/admin/`
 
 ## Accessing the Admin Portal
 
@@ -66,9 +66,9 @@ Follow the instructions below to set up and run the application.
 - To run tests:
   `python manage.py test`
 
-<!-- ## Contributing
+## Contributing
 
-Please read our CONTRIBUTING.md file for details on our code of conduct and the process for submitting pull requests. -->
+Please read our CONTRIBUTING.md file for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
