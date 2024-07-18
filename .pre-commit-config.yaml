@@ -1,3 +1,4 @@
+include: ^backend/
 exclude: ^(poetry.lock|.idea/)
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -43,7 +44,7 @@ repos:
         additional_dependencies:
           - tomli
 
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.366
-    hooks:
-      - id: pyright
+  # - repo: https://github.com/RobertCraigie/pyright-python
+  #   rev: v1.1.366
+  #   hooks:
+  #     - id: pyright

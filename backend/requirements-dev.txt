@@ -1,2 +1,4 @@
+
+coverage
 pre-commit==3.7.1
 ruff==0.5.2
