@@ -28,7 +28,7 @@ function Header({
   }, []);
 
   const navList = (
-    <ul className="text-gray-900 dark:text-gray-50 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="text-gray-900 dark:text-gray-200 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {menu.map((item) => (
         <li
           key={item.path}
@@ -49,7 +49,7 @@ function Header({
   return (
     <div>
       <Navbar
-        className="fixed border-0 top-0 z-10 h-max rounded-none py-2 px-6 lg:px-8 lg:py-4 opacity-100 backdrop-blur-lg transition-opacity dark:bg-gray-900 shadow-none dark:shadow-gray-900/40"
+        className="fixed border-0 top-0 z-10 h-max rounded-none py-2 px-6 lg:px-8 lg:py-4 opacity-100 backdrop-blur-lg transition-opacity dark:bg-black shadow-none dark:shadow-gray-900/40"
         style={{
           WebkitBackdropFilter: "blur(16px)",
           width: "-webkit-fill-available",
@@ -75,7 +75,7 @@ function Header({
             </IconButton>
             <NavLink
               to="/"
-              className="mr-4 cursor-pointer py-1.5 font-medium dark:text-gray-100 text-black"
+              className="mr-4 cursor-pointer py-1.5 font-semibold text-xl dark:text-gray-200 text-black"
             >
               Split Buddy
             </NavLink>
@@ -84,15 +84,8 @@ function Header({
             <div className="mr-4 hidden lg:block">{navList}</div>
             <ThemeToggle />
             <div className="flex items-center gap-x-1">
-              {/* <Button
-                variant="gradient"
-                size="sm"
-                className="rounded-[0.5rem] bg-gray-900 dark:bg-gray-50"
-              >
-                <span>Sign in</span>
-              </Button> */}
               <button
-                className="select-none rounded-[0.5rem] bg-gray-900 dark:bg-gray-100 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white dark:text-gray-900 shadow-md shadow-gray-900/10 dark:shadow-gray-50/10 transition-all ease-in-out hover:shadow-lg hover:shadow-gray-900/20 dark:hover:shadow-gray-100/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="select-none rounded-lg bg-gray-900 dark:bg-gray-200 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white dark:text-gray-900 shadow-md shadow-gray-900/10 dark:shadow-gray-50/10 transition-all ease-in-out hover:shadow-lg hover:shadow-gray-900/20 dark:hover:shadow-gray-100/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
               >
                 Sign in
@@ -107,7 +100,7 @@ function Header({
               fullWidth
               variant="gradient"
               size="sm"
-              className="rounded-[0.5rem]"
+              className="rounded-lg"
             >
               <span>Sign in</span>
             </Button>

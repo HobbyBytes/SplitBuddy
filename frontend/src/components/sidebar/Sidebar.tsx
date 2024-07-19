@@ -26,23 +26,23 @@ function Sidebar({
 
   const SideBarList = () => {
     return (
-      <List className="px-0 dark:text-gray-50">
+      <List className="px-0 dark:text-gray-200 font-intervariable ">
         {/* <hr className="my-2 border-blue-gray-50 dark:border-blue-gray-800" /> */}
-        <ListItem className="rounded-[0.5rem] dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
+        <ListItem className="rounded-lg dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
           <ListItemPrefix>
-            <FaUser className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+            <FaUser className="h-5 w-5 text-gray-900 dark:text-gray-300" />
           </ListItemPrefix>
           Profile
         </ListItem>
-        <ListItem className="rounded-[0.5rem] dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
+        <ListItem className="rounded-lg dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
           <ListItemPrefix>
-            <FaGear className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+            <FaGear className="h-5 w-5 text-gray-900 dark:text-gray-300" />
           </ListItemPrefix>
           Settings
         </ListItem>
-        <ListItem className="rounded-[0.5rem] dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
+        <ListItem className="rounded-lg dark:hover:bg-blue-gray-800 dark:focus:bg-blue-gray-800 dark:active:bg-blue-gray-800 dark:hover:text-blue-gray-100 dark:focus:text-blue-gray-100">
           <ListItemPrefix>
-            <FaPowerOff className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+            <FaPowerOff className="h-5 w-5 text-gray-900 dark:text-gray-300" />
           </ListItemPrefix>
           Sign Out
         </ListItem>
@@ -52,7 +52,7 @@ function Sidebar({
 
   const ModalOverlay = () => (
     <div
-      className={`flex lg:hidden fixed mt-[52px] lg:mt-[70px] top-0 right-0 bottom-0 left-0 bg-gray-900/25 opacity-100 backdrop-blur-lg transition-opacity`}
+      className={`flex lg:hidden fixed mt-[52px] lg:mt-[70px] top-0 right-0 bottom-0 left-0 bg-gray-800/25 opacity-100 backdrop-blur-lg transition-opacity`}
       style={{
         WebkitBackdropFilter: "blur(16px)",
       }}
@@ -63,12 +63,12 @@ function Sidebar({
   );
 
   return (
-    <Card>
+    <Card className="font-intervariable ">
       <div
-        className={`${sidebarClass} bg-white/90 dark:bg-gray-900/90 mt-[52px] lg:mt-[70px] w-80 py-4 px-6 lg:px-8 rounded-none shadow-none transition-[margin-left] ease-in-out duration-500 fixed top-0 bottom-0 left-0 lg:left-auto z-10 opacity-100 backdrop-blur-3xl`}
+        className={`${sidebarClass} bg-white/90 dark:bg-black/90 mt-[52px] lg:mt-[70px] w-80 py-4 px-6 lg:px-8 rounded-none shadow-none transition-[margin-left] ease-in-out duration-500 fixed top-0 bottom-0 left-0 lg:left-auto z-10 opacity-100 backdrop-blur-3xl`}
       >
         <Input
-          icon={<FaMagnifyingGlass className="h-5 w-5" />}
+          icon={<FaMagnifyingGlass className="h-4 w-4" />}
           label="Search"
         />
         <SideBarList />

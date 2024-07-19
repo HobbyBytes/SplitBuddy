@@ -9,7 +9,7 @@ function Layout() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="bg-white dark:bg-gray-900 w-screen">
+    <div className="bg-white dark:bg-black font-intervariable w-screen">
       <div className="flex flex-col container min-h-screen px-0 mx-auto">
         <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         <div className="flex flex-row flex-grow px-0 mt-[52px] lg:mt-[70px]">

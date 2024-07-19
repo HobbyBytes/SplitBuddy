@@ -79,7 +79,7 @@ function Header() {
             </Button>
           </div>
         </div>
-        <Collapse className="text-black dark:text-gray-50" open={openNav}>
+        <Collapse className="text-black dark:text-gray-100" open={openNav}>
           {navList}
         </Collapse>
       </Navbar>
