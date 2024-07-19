@@ -9,10 +9,10 @@ function ThemeToggle() {
   useEffect(() => {
     if (isDark === "dark") {
       //   document.body.classList.add("dark");
-      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
       //   document.body.classList.remove("dark");
-      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
 
     if (isDark !== null) {
@@ -26,13 +26,13 @@ function ThemeToggle() {
         <HiSun
           title="Change to light mode"
           onClick={() => setIsDark("light")}
-          className={`h-6 w-6 text-gray-800 hover:cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200 sm:h-8 sm:w-8 ${classes.fadeInSun}`}
+          className={`h-6 w-6 text-gray-800 hover:cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200 ${classes.fadeInSun}`}
         />
       ) : (
         <HiMoon
           title="Change to dark mode"
           onClick={() => setIsDark("dark")}
-          className={`h-6 w-6 text-gray-800 hover:cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200 sm:h-8 sm:w-8 ${classes.fadeInMoon}`}
+          className={`h-6 w-6 text-gray-800 hover:cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200 ${classes.fadeInMoon}`}
         />
       )}
     </div>

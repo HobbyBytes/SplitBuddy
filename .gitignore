@@ -249,3 +249,6 @@ pythontemplate/*.html
 poetry.toml
 # PDFs
 *.pdf
+
+# VS Code
+.vscode/
