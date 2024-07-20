@@ -61,9 +61,10 @@ function Sidebar({
   );
 
   return (
-    <Card className="font-intervariable ">
+    <Card className="font-intervariable">
+      {/* lg:mb-[56px] */}
       <div
-        className={`${sidebarClass} bg-white/90 dark:bg-black/90 mt-[52px] lg:mt-[70px] w-80 py-4 px-6 lg:px-8 rounded-none shadow-none transition-[margin-left] ease-in-out duration-500 fixed top-0 bottom-0 left-0 lg:left-auto z-10 opacity-100 backdrop-blur-3xl`}
+        className={`${sidebarClass} bg-white/90 dark:bg-black/90 mt-[52px] lg:mt-[70px] lg:mb-[56px] w-80 py-4 px-6 lg:px-8 rounded-none shadow-none transition-[margin-left] ease-in-out duration-500 fixed top-0 bottom-0 left-0 lg:left-auto z-10 opacity-100 backdrop-blur-3xl`}
       >
         <Input
           icon={<FaMagnifyingGlass className="h-4 w-4" />}
