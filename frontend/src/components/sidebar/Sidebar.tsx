@@ -2,11 +2,9 @@ import React from "react";
 import {
   Card,
   Input,
-  Typography,
   List,
   ListItem,
   ListItemPrefix,
-  Button,
 } from "@material-tailwind/react";
 import { FaUser, FaGear, FaPowerOff, FaMagnifyingGlass } from "react-icons/fa6";
 

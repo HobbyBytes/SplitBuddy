@@ -1,22 +1,19 @@
 import React from "react";
-import {
-  Navbar,
-  Typography,
-  Button,
-  IconButton,
-  Collapse,
-} from "@material-tailwind/react";
+import { Navbar, Button, IconButton, Collapse } from "@material-tailwind/react";
 import menu from "@/constants/menu";
 import { NavLink } from "react-router-dom";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
-import ThemeToggle from "../theme/ThemeToggle";
+import Theme from "@/components/theme/Theme";
+import { FaGithub } from "react-icons/fa6";
 
 function Header({
   showSidebar,
   setShowSidebar,
+  className,
 }: {
   showSidebar: boolean;
   setShowSidebar: Function;
+  className: string;
 }) {
   const [openNav, setOpenNav] = React.useState(false);
 
@@ -49,10 +46,9 @@ function Header({
   return (
     <div>
       <Navbar
-        className="fixed border-0 top-0 z-10 h-max rounded-none py-2 px-6 lg:px-8 lg:py-4 opacity-100 backdrop-blur-lg transition-opacity dark:bg-black shadow-none dark:shadow-gray-900/40"
+        className={`${className} fixed border-0 top-0 z-10 h-max rounded-none py-2 px-6 lg:px-8 lg:py-4 opacity-100 backdrop-blur-lg transition-opacity dark:bg-black shadow-none dark:shadow-gray-900/40`}
         style={{
           WebkitBackdropFilter: "blur(16px)",
-          width: "-webkit-fill-available",
         }}
       >
         <div className="px-0 flex items-center justify-between text-blue-gray-900">
@@ -75,22 +71,27 @@ function Header({
             </IconButton>
             <NavLink
               to="/"
-              className="mr-4 cursor-pointer py-1.5 font-semibold text-xl dark:text-gray-200 text-black"
+              className="mr-4 cursor-pointer py-1.5 font-semibold sm:text-xl dark:text-gray-200 text-black"
             >
               Split Buddy
             </NavLink>
           </div>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <ThemeToggle />
-            <div className="flex items-center gap-x-1">
-              <button
-                className="select-none rounded-lg bg-gray-900 dark:bg-gray-200 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white dark:text-gray-900 shadow-md shadow-gray-900/10 dark:shadow-gray-50/10 transition-all ease-in-out hover:shadow-lg hover:shadow-gray-900/20 dark:hover:shadow-gray-100/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button"
-              >
-                Sign in
-              </button>
-            </div>
+            <a
+              className="hidden sm:block"
+              href="https://github.com/HobbyBytes"
+              target="_blank"
+            >
+              <FaGithub className="h-6 w-6 text-gray-800 hover:cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200" />
+            </a>
+            <Theme className="" />
+            <button
+              className="select-none rounded-lg bg-gray-900 dark:bg-gray-200 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white dark:text-gray-900 shadow-md shadow-gray-900/10 dark:shadow-gray-50/10 transition-all ease-in-out hover:shadow-lg hover:shadow-gray-900/20 dark:hover:shadow-gray-100/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+            >
+              Sign in
+            </button>
           </div>
         </div>
         <Collapse open={openNav}>

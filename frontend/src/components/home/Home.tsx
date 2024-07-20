@@ -2,7 +2,7 @@ import { Card, Typography } from "@material-tailwind/react";
 
 function HomePage() {
   return (
-    <div className="max-w-screen-md pb-12">
+    <div className="">
       <Card className="mb-12">
         <img
           alt="nature"

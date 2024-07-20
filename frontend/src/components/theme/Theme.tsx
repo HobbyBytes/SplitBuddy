@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { HiMoon, HiSun } from "react-icons/hi2";
-import classes from "./ThemeToggle.module.css";
-import { getDefaultTheme, setThemeLocal } from "../../utils/themeLocalStorage";
+import classes from "./Theme.module.css";
+import { getDefaultTheme, setThemeLocal } from "@/utils/themeLocalStorage";
 
-function ThemeToggle() {
+function Theme({ className }: { className: string }) {
   const [isDark, setIsDark] = useState(getDefaultTheme());
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function ThemeToggle() {
   }, [isDark]);
 
   return (
-    <div>
+    <div className={className}>
       {isDark === "dark" ? (
         <HiSun
           title="Change to light mode"
@@ -39,4 +39,4 @@ function ThemeToggle() {
   );
 }
 
-export default ThemeToggle;
+export default Theme;

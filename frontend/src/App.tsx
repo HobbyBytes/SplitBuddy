@@ -1,22 +1,24 @@
-import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import HomePage from "./components/home/HomePage";
+import "./App.css";
+import Home from "./components/home/Home";
+import Transactions from "./components/transactions/Transactions";
 import Header from "./components/header/Header";
-import Sidebar from "./components/sidebar/Sidebar";
 import { useState } from "react";
+import Sidebar from "./components/sidebar/Sidebar";
 
 function Layout() {
   const [showSidebar, setShowSidebar] = useState(false);
-
   return (
     <div className="bg-white dark:bg-black font-intervariable w-screen">
-      <div className="flex flex-col container min-h-screen px-0 mx-auto">
-        <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-        <div className="flex flex-row flex-grow px-0 mt-[52px] lg:mt-[70px]">
-          <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-          <div className="lg:ml-80 px-6 lg:px-8 py-4">
-            <Outlet />
-          </div>
+      <Header
+        className="max-w-none"
+        showSidebar={showSidebar}
+        setShowSidebar={setShowSidebar}
+      />
+      <div className="flex flex-row mt-[52px] lg:mt-[72px] h-dvh">
+        <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+        <div className="px-6 py-4 lg:px-8 lg:ml-80 h-[calc(100vh-52px)] lg:h-[calc(100vh-72px)] w-screen lg:w-[calc(100vw-20rem)] overflow-auto">
+          <Outlet />
         </div>
       </div>
     </div>
@@ -30,29 +32,18 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <Home />,
+      },
+      {
+        path: "/transactions",
+        element: <Transactions />,
       },
     ],
   },
 ]);
 
 function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
-/*
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-*/
 export default App;
