@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 
 
 class Currency(models.Model):
@@ -22,7 +22,7 @@ class Transaction(models.Model):
     timestamp = models.DateTimeField(default=timezone.now, null=False, blank=False)
     description = models.TextField(blank=True, null=True)
     owner = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="transactions",
         null=False,

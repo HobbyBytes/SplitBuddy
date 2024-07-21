@@ -7,9 +7,13 @@ import {
   ListItem,
   ListItemSuffix,
 } from "@material-tailwind/react";
+import Transaction from "@/types/Transaction";
 
 function Transactions() {
-  const [transactionState, setTransactionState] = useState({
+  const [transactionState, setTransactionState] = useState<{
+    loading: boolean;
+    transactions: Transaction[];
+  }>({
     loading: false,
     transactions: [],
   });
