@@ -8,6 +8,7 @@ import {
   ListItemSuffix,
 } from "@material-tailwind/react";
 import Transaction from "@/types/Transaction";
+import axiosInstance from "@/api/axios";
 
 function Transactions() {
   const [transactionState, setTransactionState] = useState<{
@@ -21,15 +22,21 @@ function Transactions() {
   useEffect(() => {
     setTransactionState({ loading: true, transactions: [] });
     const apiUrl = `http://127.0.0.1:8000/transactions/`;
-    fetch(apiUrl)
-      .then((data) => data.json())
-      .then((txs) => {
-        setTransactionState({
-          loading: false,
-          transactions: txs,
-        });
-        console.log(txs);
+    axiosInstance.get(`transactions/`).then((res) => {
+      setTransactionState({
+        loading: false,
+        transactions: res.data,
       });
+    });
+    // fetch(apiUrl)
+    //   .then((data) => data.json())
+    //   .then((txs) => {
+    //     setTransactionState({
+    //       loading: false,
+    //       transactions: txs,
+    //     });
+    //     console.log(txs);
+    //   });
   }, [setTransactionState]);
 
   return (

@@ -2,16 +2,8 @@ import { Card, Typography } from "@material-tailwind/react";
 import { useEffect } from "react";
 
 function HomePage() {
-  useEffect(() => {
-    const apiURL = "http://127.0.0.1:8000/transactions/";
-
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  });
-
   return (
-    <div className="">
+    <div>
       <Card className="mb-12">
         <img
           alt="nature"

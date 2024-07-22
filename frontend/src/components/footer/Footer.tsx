@@ -3,7 +3,7 @@ import { socialLinks, websiteUrl } from "@/constants/Social";
 function Footer() {
   return (
     // sticky bottom-0
-    <footer className="z-8 opacity-100 backdrop-blur-lg transition-opacity font-intervariable w-full px-0 text-gray-800 dark:bg-black dark:text-gray-400 sm:px-6">
+    <footer className="z-8 opacity-100 backdrop-blur-lg transition-opacity font-intervariable w-full px-0 text-gray-800 dark:bg-gray-900 dark:text-gray-400 sm:px-6">
       <div className="mx-auto w-full max-w-full px-6 py-4 sm:px-0 md:flex md:items-center md:justify-between">
         <span className="text-sm sm:text-center">
           &#169; {new Date().getFullYear()}{" "}
@@ -27,7 +27,7 @@ function Footer() {
             ))}
           </ul>
 
-          <p className="text-xs md:text-sm">
+          <p className="text-xs md:text-sm hidden sm:block">
             Built with <span style={{ color: "#e25555" }}>&#9829;</span> by{" "}
             <a
               href="https://github.com/HobbyBytes"
