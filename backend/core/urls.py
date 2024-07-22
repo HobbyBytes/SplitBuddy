@@ -17,6 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -26,4 +31,24 @@ urlpatterns = [
     path("auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("transactions/", include("transactions.urls", namespace="transactions")),
+    # path(
+    #     "schema/",
+    #     get_schema_view(
+    #         title="Split Buddy",
+    #         description="API for Split Buddy",
+    #         version="1.0.0",
+    #     ),
+    #     name="openapi-schema",
+    # ),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "docs/swagger-ui",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "docs/redoc",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc-ui",
+    ),
 ]

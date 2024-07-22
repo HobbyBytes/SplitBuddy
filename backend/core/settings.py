@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -202,5 +204,14 @@ LOGGING = {
             "format": "{asctime} ({levelname})- {name}- {message}",
             "style": "{",
         }
+    },
+}
+
+SPECTACULAR_SETTINGS = {
+    "AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True,
     },
 }
