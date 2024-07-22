@@ -29,14 +29,20 @@ function Signin() {
 
     axiosInstance
       .post(`auth/token/`, {
-        email: formData.email,
+        username: formData.email,
         password: formData.password,
+        grant_type: "password",
+        client_id: "FbFA2V1g18ufQxkflrF27J24KNRA0pYs0mSlI7ZE",
+        client_secret:
+          "wE2GiEcfPdV2SogigJEyPwqsNzSzG0pF5l8Yxprv8WF4X6egBonBuCIEMquEcUoUuZciiIAGb6w7zQlxHtOX9vQnFFmcHDU0YyzkDjoxzktZAINgoK9uMDQqhXr9Xngi",
       })
       .then((res) => {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
+        console.log(res);
+
+        localStorage.setItem("access_token", res.data.access_token);
+        localStorage.setItem("refresh_token", res.data.refresh_token);
         axiosInstance.defaults.headers["Authorization"] =
-          "JWT" + " " + localStorage.getItem("access_token");
+          "Bearer" + " " + localStorage.getItem("access_token");
         navigate("/");
       });
   };

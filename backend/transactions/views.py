@@ -4,6 +4,7 @@ from rest_framework.permissions import (
     BasePermission,
     SAFE_METHODS,
     IsAdminUser,
+    IsAuthenticated,
     DjangoModelPermissionsOrAnonReadOnly,
     DjangoModelPermissions,
 )
@@ -36,7 +37,8 @@ class TransactionUserPermission(BasePermission):
 
 # Create your views here.
 class TransactionList(generics.ListCreateAPIView):
-    permission_classes = [TransactionUserPermission]
+    # permission_classes = [TransactionUserPermission]
+    permission_classes = [IsAuthenticated]
     # queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 

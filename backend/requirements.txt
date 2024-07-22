@@ -2,6 +2,7 @@ django
 
 djangorestframework
 django-cors-headers
+drf_social_oauth2
 
 celery[redis]
 
