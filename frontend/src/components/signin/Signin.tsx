@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa6";
 import axiosInstance from "@/api/axios";
+import { useGoogleLogin } from "@react-oauth/google";
+import isAuthenticated from "@/utils/isAuthenticated";
 
 function Signin() {
   const [passwordShown, setPasswordShown] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/home");
+    }
+  });
+
+  const emailPasswordAuthEndpoint = import.meta.env
+    .VITE_EMAIL_PASSWORD_AUTH_ENDPOINT;
+  const socialAuthTokenExEndpoint = import.meta.env
+    .VITE_SOCIAL_AUTH_TOKEN_EX_ENDPOINT;
+
+  const emailPasswordAuthClientID = import.meta.env
+    .VITE_EMAIL_PASSWORD_AUTH_CLIENT_ID;
+  const emailPasswordAuthClientSecret = import.meta.env
+    .VITE_EMAIL_PASSWORD_AUTH_CLIENT_SECRET;
+
+  const socialAuthClientID = import.meta.env.VITE_SOCIAL_AUTH_CLIENT_ID;
+  const socialAuthClientSecret = import.meta.env.VITE_SOCIAL_AUTH_CLIENT_SECRET;
 
   const initialFormData = Object.freeze({
     email: "",
@@ -14,38 +36,62 @@ function Signin() {
   const [formData, updateFormData] = useState(initialFormData);
 
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(formData);
 
     axiosInstance
-      .post(`auth/token/`, {
+      .post(emailPasswordAuthEndpoint, {
         username: formData.email,
         password: formData.password,
         grant_type: "password",
-        client_id: "FbFA2V1g18ufQxkflrF27J24KNRA0pYs0mSlI7ZE",
-        client_secret:
-          "wE2GiEcfPdV2SogigJEyPwqsNzSzG0pF5l8Yxprv8WF4X6egBonBuCIEMquEcUoUuZciiIAGb6w7zQlxHtOX9vQnFFmcHDU0YyzkDjoxzktZAINgoK9uMDQqhXr9Xngi",
+        client_id: emailPasswordAuthClientID,
+        client_secret: emailPasswordAuthClientSecret,
       })
       .then((res) => {
         console.log(res);
-
         localStorage.setItem("access_token", res.data.access_token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
+        localStorage.setItem("login_type", "email_password");
         axiosInstance.defaults.headers["Authorization"] =
           "Bearer" + " " + localStorage.getItem("access_token");
         navigate("/");
       });
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse);
+
+      axiosInstance
+        .post(socialAuthTokenExEndpoint, {
+          token: tokenResponse.access_token,
+          backend: "google-oauth2",
+          grant_type: "convert_token",
+          client_id: socialAuthClientID,
+          client_secret: socialAuthClientSecret,
+        })
+        .then((res) => {
+          console.log(res);
+
+          localStorage.setItem("access_token", res.data.access_token);
+          localStorage.setItem("refresh_token", res.data.refresh_token);
+          localStorage.setItem("login_type", "social_client");
+          axiosInstance.defaults.headers["Authorization"] =
+            "Bearer" + " " + localStorage.getItem("access_token");
+          navigate("/");
+        });
+    },
+    // flow: "auth-code",
+  });
 
   return (
     <div
@@ -84,7 +130,6 @@ function Signin() {
 
               {/* <p className="mt-2 text-gray-600">Create an account</p> */}
             </div>
-
             <div className="mt-6">
               <form>
                 <div>
@@ -157,15 +202,19 @@ function Signin() {
                 </NavLink>
               </p>
             </div>
-
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-5/12 dark:border-gray-800"></span>
               <a className="text-xs text-center text-gray-600 uppercase">or</a>
               <span className="border-b w-5/12 dark:border-gray-800"></span>
             </div>
-
-            <button className="w-full select-none flex items-center justify-center mt-4 border border-gray-800 dark:border-gray-200 text-center rounded-lg text-gray-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none transition-all hover:opacity-75 active:opacity-[0.85] tracking-wide focus:ring focus:ring-blue-300 focus:ring-opacity-50 hover:bg-gray-100/30 dark:hover:bg-gray-800/30">
-              <div className="px-4 py-3">
+            <button
+              className="w-full select-none flex items-center justify-center gap-4 mt-4 border border-gray-800 dark:border-gray-200 text-center rounded-lg text-gray-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none transition-all hover:opacity-75 active:opacity-[0.85] tracking-wide focus:ring focus:ring-blue-300 focus:ring-opacity-50 hover:bg-gray-100/30 dark:hover:bg-gray-800/30"
+              onClick={() => googleLogin()}
+            >
+              <span className="py-3 tracking-wide dark:text-gray-400 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 transition-colors">
+                Continue with Google
+              </span>
+              <div className="py-3">
                 <svg className="h-6 w-6" viewBox="0 0 40 40">
                   <path
                     d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
@@ -185,10 +234,11 @@ function Signin() {
                   />
                 </svg>
               </div>
-              <span className="px-4 py-3 w-5/6 tracking-wide dark:text-gray-400 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 transition-colors">
-                Continue with Google
-              </span>
             </button>
+            {/* not using this as this is return credential not access token */}
+            {/* <div className="w-full select-none flex items-center justify-center mt-4 border border-gray-800 dark:border-gray-200 text-center rounded-lg text-gray-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none transition-all hover:opacity-75 active:opacity-[0.85] tracking-wide focus:ring focus:ring-blue-300 focus:ring-opacity-50 hover:bg-gray-100/30 dark:hover:bg-gray-800/30">
+              <GoogleLogin onSuccess={onSuccess} onError={onError} />
+            </div> */}
           </div>
         </div>
       </div>

@@ -34,6 +34,10 @@ const router = createBrowserRouter([
         element: <Signin />,
       },
       {
+        path: "/signout",
+        element: <Signout />,
+      },
+      {
         element: <ProtectedRoute />,
         children: [
           {
@@ -41,10 +45,6 @@ const router = createBrowserRouter([
             element: <Transactions />,
           },
         ],
-      },
-      {
-        path: "/signout",
-        element: <Signout />,
       },
     ],
   },

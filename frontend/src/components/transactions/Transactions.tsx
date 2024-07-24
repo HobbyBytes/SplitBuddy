@@ -38,7 +38,7 @@ function Transactions() {
         <Card className="my-6 w-96">
           <List>
             {transactionState.transactions.map((transaction) => (
-              <ListItem>
+              <ListItem key={transaction.id}>
                 {transaction?.title}
                 <ListItemSuffix>
                   <Chip

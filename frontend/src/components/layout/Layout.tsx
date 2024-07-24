@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import Sidebar from "../sidebar/Sidebar";
@@ -27,7 +27,7 @@ function Layout() {
             !isHomePage && !isRegisterPage && !isSigninPage
               ? `w-[-webkit-fill-available] lg:ml-80 lg:w-[calc(100vw-20rem)]`
               : `w-screen`
-          } px-6 py-4 lg:px-8 overflow-y-scroll`}
+          } px-6 py-4 lg:px-8 overflow-y-auto`}
         >
           <Outlet />
         </div>

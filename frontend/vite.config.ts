@@ -17,6 +17,10 @@ export default (args: ViteConfigInput) => {
 
   return defineConfig({
     plugins: [react()],
+    server: {
+      host: "localhost",
+      port: 5173,
+    },
     resolve: {
       alias: { "@": path.resolve(__dirname, "./src") },
     },

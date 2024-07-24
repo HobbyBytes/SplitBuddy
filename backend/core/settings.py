@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     "transactions",
     "corsheaders",
     "users",
-    # oauth
     "drf_spectacular",
+    # oauth
     "oauth2_provider",
     "social_django",
     "drf_social_oauth2",
@@ -142,6 +142,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "oauth2_provider.contrib.rest_framework.OAuth2Authentication",  # django-oauth-toolkit >= 1.0.0
         "drf_social_oauth2.authentication.SocialAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
 }
 
@@ -151,6 +153,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:8000",
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 AUTH_USER_MODEL = "users.CustomUser"
 
@@ -180,15 +185,51 @@ LOGGING = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+    # "AUTHENTICATION_CLASSES": (
+    #     "rest_framework_simplejwt.authentication.JWTAuthentication",
+    # ),
     "SWAGGER_UI_SETTINGS": {
         "persistAuthorization": True,
     },
 }
 
 AUTHENTICATION_BACKENDS = (
+    # Google OAuth2
+    "social_core.backends.google.GoogleOAuth2",
+    # Facebook OAuth2
+    "social_core.backends.facebook.FacebookAppOAuth2",
+    "social_core.backends.facebook.FacebookOAuth2",
+    # drf_social_oauth2
     "drf_social_oauth2.backends.DjangoOAuth2",
+    # Django
     "django.contrib.auth.backends.ModelBackend",
 )
+
+# Facebook configuration
+SOCIAL_AUTH_FACEBOOK_KEY = "962851595641057"
+SOCIAL_AUTH_FACEBOOK_SECRET = "eb18bf763fb9ad9892ee65bf4b43ed2d"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "http://localhost:5173/"
+
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
+# Email is not sent by default, to get it, you must request the email permission.
+SOCIAL_AUTH_FACEBOOK_SCOPE = ["email"]
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {"fields": "id, name, email"}
+SOCIAL_AUTH_USER_FIELDS = ["email", "username", "password", "first_name"]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
+    "862863136762-oh76ve3se4ibto9ldsqp9ub99mb6jfrr.apps.googleusercontent.com"
+)
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_USER_FIELDS = [
+    "first_name",
+    "last_name",
+    "email",
+    "username",
+    "password",
+]
+# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+]

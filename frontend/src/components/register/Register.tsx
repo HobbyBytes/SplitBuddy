@@ -6,6 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 function Register() {
   const [passwordShown, setPasswordShown] = useState(false);
 
+  const userRegisterEndpoint = import.meta.env.VITE_USER_REGISTER_ENDPOINT;
+
   const initialFormData = Object.freeze({
     email: "",
     username: "",
@@ -28,7 +30,7 @@ function Register() {
     console.log(formData);
 
     axiosInstance
-      .post(`user/register/`, {
+      .post(userRegisterEndpoint, {
         email: formData.email,
         username: formData.email,
         password: formData.password,

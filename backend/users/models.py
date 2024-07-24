@@ -41,6 +41,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     start_date = models.DateTimeField(default=timezone.now)
     about = models.TextField(_("about"), max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
@@ -49,7 +50,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "first_name"]
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
+        # return self.email # change it to this statement later and check if you get any issues
         return self.username

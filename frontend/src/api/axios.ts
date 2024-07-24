@@ -1,6 +1,17 @@
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:8000/";
+const baseURL = import.meta.env.VITE_BACKEND_URL;
+
+const socialAuthTokenExEndpoint = import.meta.env
+  .VITE_SOCIAL_AUTH_TOKEN_EX_ENDPOINT;
+
+const emailPasswordAuthClientID = import.meta.env
+  .VITE_EMAIL_PASSWORD_AUTH_CLIENT_ID;
+const emailPasswordAuthClientSecret = import.meta.env
+  .VITE_EMAIL_PASSWORD_AUTH_CLIENT_SECRET;
+
+const socialAuthClientID = import.meta.env.VITE_SOCIAL_AUTH_CLIENT_ID;
+const socialAuthClientSecret = import.meta.env.VITE_SOCIAL_AUTH_CLIENT_SECRET;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -25,14 +36,14 @@ axiosInstance.interceptors.response.use(
       alert(
         "A server/network error occurred." +
           " Looks like CORS might be the problem." +
-          " Sorry about this - we will get this fixed shortly."
+          " Sorry about this - we will get this fixed shortly.",
       );
       return Promise.reject(error);
     }
 
     if (
       error.response.status === 401 &&
-      originalRequest.url == baseURL + "auth/token/refresh/"
+      originalRequest.url == baseURL + socialAuthTokenExEndpoint
     ) {
       window.location.href = "/signin";
       return Promise.reject(error);
@@ -55,11 +66,27 @@ axiosInstance.interceptors.response.use(
         console.log(tokenParts.exp);
 
         if (tokenParts.exp > now) {
+          // the endpoint to use here is socialAuthTokenEndpoint only as we only need to convert the token
           return axiosInstance
-            .post("auth/token/refresh/", { refresh: refreshToken })
+            .post(socialAuthTokenExEndpoint, {
+              grant_type: "refresh_token",
+              // setting the client ID and client secret based on the type of authentication
+              client_id:
+                localStorage.getItem("login_type") === "email_password"
+                  ? emailPasswordAuthClientID
+                  : socialAuthClientID,
+              client_secret:
+                localStorage.getItem("login_type") === "email_password"
+                  ? emailPasswordAuthClientSecret
+                  : socialAuthClientSecret,
+              refresh_token: refreshToken,
+            })
             .then((response) => {
-              localStorage.setItem("access_token", response.data.access);
-              localStorage.setItem("refresh_token", response.data.refresh);
+              localStorage.setItem("access_token", response.data.access_token);
+              localStorage.setItem(
+                "refresh_token",
+                response.data.refresh_token,
+              );
 
               axiosInstance.defaults.headers["Authorization"] =
                 "Bearer " + response.data.access;
@@ -82,7 +109,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;

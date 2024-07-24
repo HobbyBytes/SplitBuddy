@@ -28,10 +28,10 @@ urlpatterns = [
     path("auth/", include("drf_social_oauth2.urls", namespace="drf")),
     # Project URLs
     path("admin/", admin.site.urls),
+    # path("auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("transactions/", include("transactions.urls", namespace="transactions")),
     # User Management
     path("user/", include("users.urls", namespace="users")),
-    # path("auth/", include("rest_framework.urls", namespace="rest_framework")),
     # API Schema and Documentation
     # path(
     #     "schema/",
